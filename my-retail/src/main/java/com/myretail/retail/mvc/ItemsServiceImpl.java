@@ -1,5 +1,6 @@
 package com.myretail.retail.mvc;
 
+import com.myretail.converters.ItemsConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ItemsServiceImpl implements ItemsService, DataBaseService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
+    private ItemsConverter itemsConverter;
+
+    @Autowired
     private PriceDetailsRepo priceDetailsRepo;
 
     @Autowired
@@ -51,13 +55,14 @@ public class ItemsServiceImpl implements ItemsService, DataBaseService {
     }
 
     @Override
-    public void saveItemInfo(Object priceDetailsModel) {
-        priceDetailsRepo.save((PriceDetailsModel) priceDetailsModel);
+    public void saveItemInfo(Object priceDetailsPojo) {
+        PriceDetailsModel priceDetailsModel = itemsConverter.convert((PriceDetailsModelPojo) priceDetailsPojo);
+        priceDetailsRepo.save(priceDetailsModel);
     }
 
     @Override
-    public void updateItemInfo(Object priceDetailsModel) {
-        saveItemInfo(priceDetailsModel);
+    public void updateItemInfo(Object priceDetailsPojo) {
+        saveItemInfo(priceDetailsPojo);
     }
 
     @Override

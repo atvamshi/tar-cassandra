@@ -3,13 +3,13 @@ package com.myretail.retail.mvc;
 import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -53,11 +53,10 @@ import java.util.UUID;
 //
 //}
 
-@org.springframework.data.cassandra.core.mapping.Table("ItemsPriceDetails")
+@Table("ItemsPriceDetails")
 @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-@Component
 @AllArgsConstructor
-@NoArgsConstructor
+@Component
 @Getter
 @Setter
 @ToString
@@ -66,7 +65,9 @@ public class PriceDetailsModel implements Serializable {
 
     @PrimaryKey
     @CassandraType(type = DataType.Name.UUID)
-    private UUID itemId;
+    private UUID cassandraId;
+
+    private Long itemId;
 
     private String itemName;
 
@@ -74,4 +75,7 @@ public class PriceDetailsModel implements Serializable {
 
     private String itemCurrencyType;
 
+    public PriceDetailsModel() {
+        cassandraId = UUID.randomUUID();
+    }
 }

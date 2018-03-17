@@ -1,9 +1,7 @@
 package com.myretail.retail.mvc;
 
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.transaction.Transactional;
 import java.util.UUID;
 
 /**
@@ -19,10 +17,9 @@ import java.util.UUID;
  */
 public interface PriceDetailsRepo extends CrudRepository<PriceDetailsModel, UUID> {
 
+    //    PriceDetailsModel findAllByItemNameAndItemId(String itemName, Long itemId);
     PriceDetailsModel findAllByItemNameAndItemId(String itemName, Long itemId);
 
-    @Transactional
-    @Modifying
     void deleteByItemId(Long itemId);
 
 }

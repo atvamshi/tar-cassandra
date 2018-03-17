@@ -97,6 +97,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[]{"guru.springframework.domain"};
+        return new String[]{"com.myretail"};
     }
 }

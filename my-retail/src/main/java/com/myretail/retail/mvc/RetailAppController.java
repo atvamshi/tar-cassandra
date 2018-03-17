@@ -80,9 +80,9 @@ public class RetailAppController {
     @Validated
     @ResponseBody
     @RequestMapping(value = "/items", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Object> addItemToDb(@RequestBody PriceDetailsModel priceDetailsModel) {
+    public ResponseEntity<Object> addItemToDb(@RequestBody PriceDetailsModelPojo priceDetailsPojo) {
         try {
-            dataBaseService.saveItemInfo(priceDetailsModel);
+            dataBaseService.saveItemInfo(priceDetailsPojo);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -128,9 +128,9 @@ public class RetailAppController {
     @Validated
     @ResponseBody
     @RequestMapping(value = "/items", method = RequestMethod.PUT, consumes = "application/json")
-    public ResponseEntity<Object> updateItemInDb(@RequestBody PriceDetailsModel priceDetailsModel) {
+    public ResponseEntity<Object> updateItemInDb(@RequestBody PriceDetailsModelPojo priceDetailsModelPojo) {
         try {
-            dataBaseService.updateItemInfo(priceDetailsModel);
+            dataBaseService.updateItemInfo(priceDetailsModelPojo);
         } catch (Exception e) {
             e.printStackTrace();
 

@@ -32,29 +32,27 @@ public class LoadDataToDb implements BeanFactoryAware {
     @Autowired
     private PriceDetailsRepo priceDetailsRepo;
 
-
-//    public LoadDataToDerby(BeanFactory beanFactory){
-//        this.beanFactory = beanFactory;
-//    }
-
     @PostConstruct
     public void addDefaultDataToDerby() {
         PriceDetailsModel priceDetailsModel;
         List<PriceDetailsModel> priceDetailsModelList = new ArrayList<>();
 
         priceDetailsModel = beanFactory.getBean(PriceDetailsModel.class);
+        priceDetailsModel.setItemId(1l);
         priceDetailsModel.setItemName("TAC");
         priceDetailsModel.setItemPrice(2000f);
         priceDetailsModel.setItemCurrencyType("USD");
         priceDetailsModelList.add(priceDetailsModel);
 
         priceDetailsModel = beanFactory.getBean(PriceDetailsModel.class);
+        priceDetailsModel.setItemId(2l);
         priceDetailsModel.setItemName("Movies");
         priceDetailsModel.setItemPrice(20);
         priceDetailsModel.setItemCurrencyType("USD");
         priceDetailsModelList.add(priceDetailsModel);
 
         priceDetailsModel = beanFactory.getBean(PriceDetailsModel.class);
+        priceDetailsModel.setItemId(3l);
         priceDetailsModel.setItemName("TV");
         priceDetailsModel.setItemPrice(9000f);
         priceDetailsModel.setItemCurrencyType("USD");
