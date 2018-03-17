@@ -1,5 +1,9 @@
 package com.myretail.cassandra.config;
 
+import com.myretail.constants.PropertiesBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.SchemaAction;
@@ -70,6 +74,11 @@ import java.util.List;
 
 @Configuration
 public class CassandraConfig extends AbstractCassandraConfiguration {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private PropertiesBean propertiesBean;
 
     public static final String KEYSPACE = "mykeyspace";
 
