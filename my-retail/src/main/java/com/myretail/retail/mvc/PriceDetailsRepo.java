@@ -30,6 +30,7 @@ public interface PriceDetailsRepo extends CrudRepository<PriceDetailsModel, UUID
     @Query("SELECT * FROM ItemsPriceDetails WHERE itemName = ?0 AND itemId= ?1 ALLOW FILTERING")
     PriceDetailsModel findTopByItemNameAndItemId(String itemName, Long itemId);
 
+
 //    List<PriceDetailsModel> findAllByItemNameAndItemId(String itemName, Long itemId);
 
 

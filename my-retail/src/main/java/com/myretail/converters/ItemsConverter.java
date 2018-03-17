@@ -35,10 +35,12 @@ public class ItemsConverter implements Converter<PriceDetailsModelPojo, PriceDet
 
         if (priceDetailsModelPojo.getItemId() == null && StringUtils.isEmpty(priceDetailsModelPojo.getItemId())) {
             priceDetailsModel.setItemId(9999999l);
+        } else {
+            priceDetailsModel.setItemId(priceDetailsModelPojo.getItemId());
         }
 
         if (priceDetailsModelPojo.getCassandraId() != null && !StringUtils.isEmpty(priceDetailsModelPojo.getCassandraId())) {
-            priceDetailsModel.setCassandraId(priceDetailsModel.getCassandraId());
+            priceDetailsModel.setCassandraId(priceDetailsModelPojo.getCassandraId());
         }
 
         priceDetailsModel.setItemCurrencyType(priceDetailsModelPojo.getItemCurrencyType());
