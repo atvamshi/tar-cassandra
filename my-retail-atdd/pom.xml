@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.test.myretail</groupId>
+    <artifactId>my-retail-atdd</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>my-retail-atdd</name>
+    <description>Acceptance test driver development project</description>
+
+
+    <properties>
+
+        <cucumber.version>1.2.5</cucumber.version>
+        <junit.version>4.12</junit.version>
+        <masterthought.version>3.9.0</masterthought.version>
+        <info.version>1.2.5</info.version>
+        <apache.lang.version>3.7</apache.lang.version>
+        <spring.core.version>5.0.3.RELEASE</spring.core.version>
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <slf4j.log4j.version>1.7.25</slf4j.log4j.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+
+        <!--Performance Properties-->
+        <jmeter.test.Files.Included>My*</jmeter.test.Files.Included>
+        <jmeter.test.Files.Excluded>NANANANA*</jmeter.test.Files.Excluded>
+        <perf.jtl.full.filename.dashboard>My_Retail_App.jtl</perf.jtl.full.filename.dashboard>
+        <jmeter.jmx.api.hostname>localhost</jmeter.jmx.api.hostname>
+
+    </properties>
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_core -->
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_core</artifactId>
+            <version>4.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>${info.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${info.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${info.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.lang.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.core.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20151123</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.0.3.BUILD-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${masterthought.version}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>cucumber-pass-widget</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <parallelTesting>false</parallelTesting>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--Plugin for Jmeter by ** Vamsi-->
+            <!--Configuring Jmeter-->
+            <!--https://github.com/jmeter-maven-plugin/jmeter-maven-plugin/wiki/Selecting-Tests-To-Run-->
+            <plugin>
+
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                        <configuration>
+                            <testFilesIncluded>
+                                <jMeterTestFile>${jmeter.test.Files.Included}</jMeterTestFile>
+                            </testFilesIncluded>
+                            <testFilesExcluded>
+                                <excludeJMeterTestFile>${jmeter.test.Files.Excluded}</excludeJMeterTestFile>
+                            </testFilesExcluded>
+                            <jMeterProcessJVMSettings>
+                                <xms>4096</xms>
+                                <xmx>4096</xmx>
+                                <arguments>
+                                    <argument>-Xprof</argument>
+                                    <argument>-Xfuture</argument>
+                                </arguments>
+                            </jMeterProcessJVMSettings>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <propertiesUser>
+                        <jmx.api.hostname>${jmeter.jmx.api.hostname}</jmx.api.hostname>
+                        <jmeter.save.saveservice.output_format>csv</jmeter.save.saveservice.output_format>
+                        <jmeter.save.saveservice.print_field_names>true</jmeter.save.saveservice.print_field_names>
+                        <jmeter.save.saveservice.successful>true</jmeter.save.saveservice.successful>
+                        <jmeter.save.saveservice.label>true</jmeter.save.saveservice.label>
+                        <jmeter.save.saveservice.time>true</jmeter.save.saveservice.time>
+                    </propertiesUser>
+                    <propertiesJMeter>
+                        <jmeter.save.saveservice.thread_counts>true</jmeter.save.saveservice.thread_counts>
+                    </propertiesJMeter>
+                    <testResultsTimestamp>false</testResultsTimestamp>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="${basedir}/target/jmeter/dashboard"/>
+                                <copy
+                                        file="${basedir}/src/test/jmeter/lib/binNew/reportgenerator.properties"
+                                        tofile="${basedir}/target/jmeter/bin/reportgenerator.properties"/>
+                                <copy todir="${basedir}/target/jmeter/bin/report-template">
+                                    <fileset dir="${basedir}/src/test/jmeter/lib/binNew/report-template"/>
+                                </copy>
+                                <java jar="${basedir}/target/jmeter/bin/ApacheJMeter-3.3.jar"
+                                      fork="true">
+                                    <arg value="-g"/>
+                                    <arg value="${basedir}/target/jmeter/results/${perf.jtl.full.filename.dashboard}"/>
+                                    <arg value="-o"/>
+                                    <arg value="${basedir}/target/jmeter/dashboard"/>
+                                </java>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
