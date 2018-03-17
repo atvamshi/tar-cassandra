@@ -44,10 +44,13 @@ public class ItemsServiceImpl implements ItemsService, DataBaseService {
         try {
             jsonObject.forEach(name -> {
                 if (priceDetailsRepo.findAllByItemNameAndItemId(name, itemId) != null) {
-                    priceDetailsModelList.add(priceDetailsRepo.findAllByItemNameAndItemId(name, itemId));
+                    priceDetailsModelList.add(priceDetailsRepo.findAllByItemNameAndItemId(name, itemId).get(0));
                 }
             });
         } catch (Exception e) {
+            if (priceDetailsModelList.size() > 0) {
+                return priceDetailsModelList;
+            }
             return null;
         }
 

@@ -33,8 +33,8 @@ public class ItemsConverter implements Converter<PriceDetailsModelPojo, PriceDet
     public PriceDetailsModel convert(PriceDetailsModelPojo priceDetailsModelPojo) {
         priceDetailsModel = beanFactory.getBean(PriceDetailsModel.class);
 
-        if (priceDetailsModelPojo.getItemId() != null && !StringUtils.isEmpty(priceDetailsModelPojo.getItemId())) {
-            priceDetailsModel.setItemId(8421l);
+        if (priceDetailsModelPojo.getItemId() == null && StringUtils.isEmpty(priceDetailsModelPojo.getItemId())) {
+            priceDetailsModel.setItemId(9999999l);
         }
 
         if (priceDetailsModelPojo.getCassandraId() != null && !StringUtils.isEmpty(priceDetailsModelPojo.getCassandraId())) {
