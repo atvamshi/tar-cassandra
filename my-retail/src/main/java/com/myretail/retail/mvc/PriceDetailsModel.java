@@ -1,5 +1,6 @@
 package com.myretail.retail.mvc;
 
+import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,15 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Project: myretail-parent
@@ -28,8 +26,34 @@ import java.io.Serializable;
  * Created with IntelliJ IDEA
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-@Table(name = "ItemsPriceDetails")
+//@Entity
+//@Table(name = "ItemsPriceDetails")
+//@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+//@Component
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Getter
+//@Setter
+//@ToString
+//public class PriceDetailsModel implements Serializable {
+//
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long itemId;
+//
+//    @Column(name = "Item_Name")
+//    private String itemName;
+//
+//    @Column(name = "Item_Price")
+//    private float itemPrice;
+//
+//    @Column(name = "Item_Currency_Type")
+//    private String itemCurrencyType;
+//
+//}
+
+@org.springframework.data.cassandra.core.mapping.Table("ItemsPriceDetails")
 @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
 @AllArgsConstructor
@@ -40,17 +64,14 @@ import java.io.Serializable;
 public class PriceDetailsModel implements Serializable {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long itemId;
+    @PrimaryKey
+    @CassandraType(type = DataType.Name.UUID)
+    private UUID itemId;
 
-    @Column(name = "Item_Name")
     private String itemName;
 
-    @Column(name = "Item_Price")
     private float itemPrice;
 
-    @Column(name = "Item_Currency_Type")
     private String itemCurrencyType;
 
 }

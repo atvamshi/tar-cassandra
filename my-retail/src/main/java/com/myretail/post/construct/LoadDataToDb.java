@@ -24,7 +24,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Component
-public class LoadDataToDerby implements BeanFactoryAware {
+public class LoadDataToDb implements BeanFactoryAware {
 
     @Autowired
     private BeanFactory beanFactory;

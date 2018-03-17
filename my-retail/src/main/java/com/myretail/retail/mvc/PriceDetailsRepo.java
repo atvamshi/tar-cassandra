@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 /**
  * Project: myretail-parent
@@ -16,7 +17,7 @@ import javax.transaction.Transactional;
  * Created with IntelliJ IDEA
  * To change this template use File | Settings | File Templates.
  */
-public interface PriceDetailsRepo extends CrudRepository<PriceDetailsModel, Long> {
+public interface PriceDetailsRepo extends CrudRepository<PriceDetailsModel, UUID> {
 
     PriceDetailsModel findAllByItemNameAndItemId(String itemName, Long itemId);
 
