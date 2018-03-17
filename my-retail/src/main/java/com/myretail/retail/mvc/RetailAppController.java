@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Project: myretail-parent
@@ -101,14 +102,14 @@ public class RetailAppController {
 
     @Validated
     @ResponseBody
-    @RequestMapping(value = "/items/{itemId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteItemInDb(@PathVariable Long itemId) {
+    @RequestMapping(value = "/items/{uUId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteItemInDb(@PathVariable UUID uUId) {
         try {
-            if (itemId <= 0) {
+            if (uUId == null) {
                 return new ResponseEntity<>(new JSONObject("Invalid item id"), HttpStatus.BAD_REQUEST);
             }
 
-            dataBaseService.deleteItemInfo(itemId);
+            dataBaseService.deleteItemInfo(uUId);
         } catch (Exception e) {
             e.printStackTrace();
 

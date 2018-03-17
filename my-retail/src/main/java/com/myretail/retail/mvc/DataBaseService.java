@@ -16,7 +16,7 @@ public interface DataBaseService {
 
     void updateItemInfo(Object object) throws Exception;
 
-    void deleteItemInfo(Object itemId) throws Exception;
+    void deleteItemInfo(Object uUid) throws Exception;
 
     <T> T getAllItems() throws Exception;
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Project: myretail-parent
@@ -43,14 +44,13 @@ public class ItemsServiceImpl implements ItemsService, DataBaseService {
         logger.info(jsonObject.toString());
         try {
             jsonObject.forEach(name -> {
-                if (priceDetailsRepo.findAllByItemNameAndItemId(name, itemId) != null) {
-                    priceDetailsModelList.add(priceDetailsRepo.findAllByItemNameAndItemId(name, itemId).get(0));
+                if (priceDetailsRepo.findTopByItemNameAndItemId(name, itemId) != null) {
+                    priceDetailsModelList.add(priceDetailsRepo.findTopByItemNameAndItemId(name, itemId));
                 }
+
             });
         } catch (Exception e) {
-            if (priceDetailsModelList.size() > 0) {
-                return priceDetailsModelList;
-            }
+            e.printStackTrace();
             return null;
         }
 
@@ -69,8 +69,8 @@ public class ItemsServiceImpl implements ItemsService, DataBaseService {
     }
 
     @Override
-    public void deleteItemInfo(Object itemId) {
-        priceDetailsRepo.deleteByItemId((Long) itemId);
+    public void deleteItemInfo(Object uUid) {
+        priceDetailsRepo.deleteAllByCassandraId((UUID) uUid);
     }
 
     public List<PriceDetailsModel> getAllItems() {
