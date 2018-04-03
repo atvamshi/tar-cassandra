@@ -34,7 +34,7 @@ public class ItemsConverter implements Converter<PriceDetailsModelPojo, PriceDet
         priceDetailsModel = beanFactory.getBean(PriceDetailsModel.class);
 
         if (priceDetailsModelPojo.getItemId() == null && StringUtils.isEmpty(priceDetailsModelPojo.getItemId())) {
-            priceDetailsModel.setItemId(9999999l);
+            priceDetailsModel.setItemId(9999999);
         } else {
             priceDetailsModel.setItemId(priceDetailsModelPojo.getItemId());
         }

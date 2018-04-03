@@ -28,7 +28,7 @@ public interface PriceDetailsRepo extends CrudRepository<PriceDetailsModel, UUID
     // may affect scalability quite a lot. Filtering is efficient over primary
     // keys, not on all generic columns
     @Query("SELECT * FROM ItemsPriceDetails WHERE itemName = ?0 AND itemId= ?1 ALLOW FILTERING")
-    PriceDetailsModel findTopByItemNameAndItemId(String itemName, Long itemId);
+    PriceDetailsModel findTopByItemNameAndItemId(String itemName, Integer itemId);
 
 
 //    List<PriceDetailsModel> findAllByItemNameAndItemId(String itemName, Long itemId);

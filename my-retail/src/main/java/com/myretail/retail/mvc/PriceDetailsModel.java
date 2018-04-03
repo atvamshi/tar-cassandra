@@ -67,7 +67,7 @@ public class PriceDetailsModel implements Serializable {
     @CassandraType(type = DataType.Name.UUID)
     private UUID cassandraId;
 
-    private Long itemId;
+    private Integer itemId;
 
     private String itemName;
 

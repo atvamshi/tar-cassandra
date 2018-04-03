@@ -45,7 +45,7 @@ public class RetailAppController {
     @Validated
     @ResponseBody
     @RequestMapping(value = "/items/{itemId}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getItemPriceInfo(@PathVariable Long itemId) {
+    public ResponseEntity<Object> getItemPriceInfo(@PathVariable Integer itemId) {
 
         List<PriceDetailsModel> priceDetailsModel;
 

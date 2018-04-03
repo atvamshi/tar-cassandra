@@ -33,7 +33,7 @@ import java.util.UUID;
 public class PriceDetailsModelPojo implements Serializable {
     private UUID cassandraId;
 
-    private Long itemId;
+    private Integer itemId;
 
     private String itemName;
 
